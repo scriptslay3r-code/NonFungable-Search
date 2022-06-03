@@ -14,13 +14,15 @@ Example output of
 https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=100&order=desc&sort=asset_id
 
 ## Example Request
-'''
+```
 curl -X 'GET' \
   'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id' \
   -H 'accept: application/json'
- '''
+ ```
+ 
+ 
  ## Example Response
- '''
+ ```
 {
   "success": true,
   "data": [
@@ -141,5 +143,4 @@ curl -X 'GET' \
       "name": "#100X3"
     }
     
-    '''
-   
+    ```
