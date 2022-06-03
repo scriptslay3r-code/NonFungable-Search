@@ -1,4 +1,4 @@
-# NonFungable-Search
+# <p align="center">NonFungable-Search</p>
 ## Searches Atomic Marketplace for nfsocialexgg assets that have been listed correctly. 
 
 #### Join the discord and learn about the community [here](https://discord.gg/cfgcFCTt)
@@ -145,3 +145,28 @@ curl -X 'GET' \
 ```
     
 #### Also thanks to [HackersAndSlackers](https://hackersandslackers.com/extract-data-from-complex-json-python/) 
+
+
+## Let me explain myself
+
+I really like the idea of this project. The entire value is based on an honor based system. 
+For example, I caught this project early, joined the Discord and earned an NFT from NFSE that allowed me to recieve future air drops. Now let's say that I recieve an air dropped 100x2 card. I am supposed to sell that card for 100 WAX and it has a resale multiplier of 2. Which means, after it is bought, it is to be re listed for 2 times the price paid originally. And in this case it would be listed for sell for 200 Wax. 
+It has a value because of the hope to resale it for a even higher amount. 
+They are technically worthless, however it's all community trust based. 
+I'm having to trust that the next guy will buy it for the price + the multiplier. 
+
+### There's a twist though 
+
+This project added an incentive to buy and resale. And they call it 'live staking'. While you have a correctly listed NFT for sale, you are eligible for future air drops. Which is a pretty interesting idea to me. 
+
+### The "issue" was people were listing the NFTs for "wrong" prices. 
+And I put air quotes around this because that's the beauty of NFTs, you own them. So you can do with it whatever the hell you want :) and I support owning your digital assets. 
+However, if you want to participate in their live staking experience, you're doing it the wrong way if you list incorrectly.  
+
+Anyway, being faced with this *issue*, you could not simply purchase any NFSE NFT and relist it for the multiplier amount. You should check the sale logs of the NFT. 
+
+And maybe I'm doing this for all for nothing. But I didn't find a way that was super simple to check the logs. 
+
+So I aim to make a program that sorts through the listings, and based off the name of the NFT, (100X2) check for proper live staking. 
+
+ .
