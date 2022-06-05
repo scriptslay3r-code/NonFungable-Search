@@ -1,21 +1,14 @@
 import requests
 import json 
+import pprint
+
+url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
 
 
-def get_assets():
-
-	response = requests.get('https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id')
-	json = response.json()
-	resp = requests.get('https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id')
-	data = resp.json()
-	asset_id = data['data']['asset_id']
-	return asset_id
-
-get_assets()
-#for key in json:
-#	print(key, json[key])
-#json_data = json.loads(response.text)
-
-#print(json['data']['name'])
-#return assest_id
+r = requests.get(url)
+jData = r.json()
+dump = json.dumps(jData)
+xData = json.loads(dump)
+id = (xData['data'][0]['asset_id'])
+pprint.pprint(id)
 
