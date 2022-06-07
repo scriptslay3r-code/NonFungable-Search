@@ -1,48 +1,72 @@
 import requests
 import json 
 import pprint
-
+#global id
 def get_id():
+	
 	url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
 	r = requests.get(url)
 	jData = r.json()
 	dump = json.dumps(jData)
 	xData = json.loads(dump)
+
 	id = (xData['data'][0]['asset_id'])
 	return id
-	
+
+
+
+asset_id = get_id()
+#asset_id = '1099738898474'
 def get_name():
-	url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
-	r = requests.get(url)
-	jData = r.json()
-	dump = json.dumps(jData)
-	xData = json.loads(dump)
-	name = (xData['data'][0]['name'])
-	return name
+	#url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
 	
-def get_multiplier():
-	url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
+	#print(id)
+#	print(get_id.id)
+	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
+	#url = ("% s % s" %(base_url , id))
+	url = base_url + asset_id
+	print(url)
 	r = requests.get(url)
 	jData = r.json()
 	dump = json.dumps(jData)
 	xData = json.loads(dump)
-	multiplier = (xData['data'][0]['data']['type'])
+	name = (xData['data']['data']['name'])
+	return name
+def get_multiplier():
+	
+	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
+	url = base_url + asset_id
+	r = requests.get(url)
+	jData = r.json()
+	dump = json.dumps(jData)
+	xData = json.loads(dump)
+	multiplier = (xData['data']['data']['type'])
 	multiplier = multiplier.replace('X', '')
 	return multiplier
 
 def get_series():
-	url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
+	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
+	url = base_url + asset_id
 	r = requests.get(url)
 	jData = r.json()
 	dump = json.dumps(jData)
 	xData = json.loads(dump)
-	series = (xData['data'][0]['data']['series'])
+	series = (xData['data']['data']['series'])
 	return series
-	
+
+def get_img():
+	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
+	url = base_url + asset_id
+	r = requests.get(url)
+	jData = r.json()
+	dump = json.dumps(jData)
+	xData = json.loads(dump)
+	img = (xData['data']['data']['img'])
+	return img
+
 def get_sales():
 	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
 
-	asset_id = '1099790610714'
 
 	paramaters = '/sales?page=1&limit=100&order=desc'
 
@@ -53,6 +77,8 @@ def get_sales():
 	dumps = json.dumps(jData)
 	xData = json.loads(dumps)
 	sales = (xData['data'][0]['price'])
+	length = len(sales)
+	sales = (sales[:length - 8] + " Wax")
 	return sales
 
 
@@ -66,5 +92,5 @@ pprint.pprint("assest id: " + id)
 pprint.pprint("name: " + name)
 pprint.pprint("multiplier: " + multiplier)
 pprint.pprint("This beautiful NFT is from the " + series + " series!")
-pprint.pprint("sales history: " + sales)
+pprint.pprint("last price bought: " + sales)
 
