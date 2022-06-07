@@ -15,8 +15,8 @@ def get_id():
 
 
 
-asset_id = get_id()
-#asset_id = '1099738898474'
+#asset_id = get_id()
+asset_id = '1099738898474'
 def get_name():
 	#url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
 	
@@ -64,6 +64,23 @@ def get_img():
 	img = (xData['data']['data']['img'])
 	return img
 
+def get_total_sales():
+	
+	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
+	url = base_url + asset_id
+	r = requests.get(url)
+	jData = r.json()
+	dump = json.dumps(jData)
+	xData = json.loads(dump)
+	totalSales = (int(xData['data']['prices'][0]['sales']))
+	return totalSales
+	
+totalSales = get_total_sales()
+
+
+	
+
+	
 def get_sales():
 	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
 
@@ -76,21 +93,40 @@ def get_sales():
 	jData = r.json()
 	dumps = json.dumps(jData)
 	xData = json.loads(dumps)
-	sales = (xData['data'][0]['price'])
-	length = len(sales)
-	sales = (sales[:length - 8] + " Wax")
-	return sales
+	if totalSales <=1:
+		
+		sales = (xData['data'][0]['price'])
+		length = len(sales)
+		sales = (sales[:length - 8] + " Wax")
+		return sales
+	
+	else:
+		
+
+		#prices = [each_price['data'] for each_price in xData['price']
+		#for element in xData[key]:
+			sales = [each_sale['price'] for each_sale in xData['data']]
+			
+		#	sales = (xData['data']['price'])
+			length = len(sales)
+			#for x in sales:
+				
+			#	sales = (sales[:length - 8])
+			return sales
+			
 
 
 id = get_id()
 name = get_name()
 multiplier = get_multiplier()
 series = get_series()
+total_sales = get_total_sales()
 sales = get_sales()
 
 pprint.pprint("assest id: " + id)
 pprint.pprint("name: " + name)
 pprint.pprint("multiplier: " + multiplier)
 pprint.pprint("This beautiful NFT is from the " + series + " series!")
-pprint.pprint("last price bought: " + sales)
+pprint.pprint("This NFT has been sold " + (str(total_sales)) + " time(s)")
+pprint.pprint("last price bought: " + (str(sales)))
 
