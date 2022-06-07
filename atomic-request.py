@@ -106,13 +106,22 @@ def get_sales():
 		#prices = [each_price['data'] for each_price in xData['price']
 		#for element in xData[key]:
 			sales = [each_sale['price'] for each_sale in xData['data']]
+			prices = sales
+			new_prices = []
+			for price in prices:
+			 	v = len(str(price)) - 8
+			 	new = str(price)[0:v]
+			 	new_prices.append(new)
+			 	
+		#	print(new_prices) 
+
 			
-		#	sales = (xData['data']['price'])
-			length = len(sales)
+			 												 					#	sales = (xData['data']['price'])
+				#length = len(sales)
 			#for x in sales:
 				
-			#	sales = (sales[:length - 8])
-			return sales
+			#sales = (sales[:length - 8])
+			return new_prices
 			
 
 
