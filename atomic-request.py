@@ -15,15 +15,26 @@ def get_id():
 
 
 
-#asset_id = get_id()
-asset_id = '1099738898474'
+asset_id = get_id()
+
+csv_filepath ="data.csv"
+
+def find_IILP(id):
+	with open(csv_filepath, 'r') as reader:
+	   	
+    		for row in reader.readlines()[1:]:
+    			
+    			columns = row.strip().split(",")
+    			if id in columns[0]:
+    				starting_price = (columns[4])
+    				return starting_price
+    				
+#asset_id = '1099738898474'
 def get_name():
 	#url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
 	
-	#print(id)
-#	print(get_id.id)
+	
 	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
-	#url = ("% s % s" %(base_url , id))
 	url = base_url + asset_id
 	print(url)
 	r = requests.get(url)
@@ -32,6 +43,8 @@ def get_name():
 	xData = json.loads(dump)
 	name = (xData['data']['data']['name'])
 	return name
+	
+
 def get_multiplier():
 	
 	base_url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets/'
@@ -109,12 +122,17 @@ def get_sales():
 			return new_prices			
 
 
+
+
+
+
 id = get_id()
 name = get_name()
 multiplier = get_multiplier()
 series = get_series()
 total_sales = get_total_sales()
 sales = get_sales()
+IILP = find_IILP(asset_id)
 
 pprint.pprint("assest id: " + id)
 pprint.pprint("name: " + name)
@@ -122,4 +140,5 @@ pprint.pprint("multiplier: " + multiplier)
 pprint.pprint("This beautiful NFT is from the " + series + " series!")
 pprint.pprint("This NFT has been sold " + (str(total_sales)) + " time(s)")
 pprint.pprint("last price bought: " + (str(sales)))
+pprint.pprint("The Initial For Sale Price Should Be: " + (str(IILP)) + " WAX")
 
