@@ -1,7 +1,8 @@
 import requests
 import json 
 import pprint
-#global id
+import data.search
+
 def get_id():
 	
 	url = 'https://wax.api.atomicassets.io/atomicmarket/v1/assets?collection_name=nfsocialexgg&schema_name=nfse&page=1&limit=1&order=desc&sort=asset_id'
@@ -14,12 +15,11 @@ def get_id():
 	return id
 
 
-
 asset_id = get_id()
 
 csv_filepath ="data.csv"
 
-def find_IILP(id):
+def find_IILP(asset_id):
 	with open(csv_filepath, 'r') as reader:
 	   	
     		for row in reader.readlines()[1:]:
@@ -113,14 +113,17 @@ def get_sales():
 	
 			sales = [each_sale['price'] for each_sale in xData['data']]
 			prices = sales
+			
 			new_prices = []
 			for price in prices:
 			 	v = len(str(price)) - 8
 			 	new = str(price)[0:v]
 			 	new_prices.append(new + " Wax")
+			 	
+			 	
 
-			return new_prices			
-
+			return new_prices
+			print(prices)			
 
 
 
@@ -132,7 +135,15 @@ multiplier = get_multiplier()
 series = get_series()
 total_sales = get_total_sales()
 sales = get_sales()
-IILP = find_IILP(asset_id)
+iilp = find_IILP(asset_id) #gets intended starting price 
+iilp_index = total_sales - 1
+first_sold_price = sales[iilp_index]
+#if total_sales != 0 AND illp == first_price_sold:
+#	counter = 1 
+#	while counter < total_sales:
+		
+csvPrice = data.search.get_price(id)
+
 
 pprint.pprint("assest id: " + id)
 pprint.pprint("name: " + name)
@@ -140,5 +151,7 @@ pprint.pprint("multiplier: " + multiplier)
 pprint.pprint("This beautiful NFT is from the " + series + " series!")
 pprint.pprint("This NFT has been sold " + (str(total_sales)) + " time(s)")
 pprint.pprint("last price bought: " + (str(sales)))
-pprint.pprint("The Initial For Sale Price Should Be: " + (str(IILP)) + " WAX")
+pprint.pprint("This should be the first sale" + str(sales[iilp_index]))
+pprint.pprint("The Initial For Sale Price Should Be: " + (str(iilp)) + " WAX")
+
 
